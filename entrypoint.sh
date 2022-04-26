@@ -377,5 +377,5 @@ expect << DONE
 DONE
 
 #Upload artifacts
-mkdir /artifacts
-cp sbs.asc /artifacts
+mkdir /github/workspace/artifacts
+cp sbs.asc /github/workspace/artifacts/
