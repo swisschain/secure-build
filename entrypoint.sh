@@ -370,12 +370,18 @@ deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk
 ./build.py get-state-image --env sbs-config.json
 ./build.py get-manifest --env sbs-config.json  --verify-manifest
 expect << DONE
-  spawn ./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-$RELEASE_VERSION-$image_tag
+  spawn ./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-$image_tag
   expect "Passphrase:" {send "$PASSPHRASE\r"}
   expect "Passphrase:" {send "$PASSPHRASE\r"}
   expect "Passphrase:" {send "$PASSPHRASE\r"}
   expect eof
 DONE
+
+#Cleaning up orphan resources
+
+ibmcloud hpvs instance-delete $BUILD_SERVER -f
+reclamation_id=`ibmcloud resource reclamations|grep SCHEDULED|awk '{print $1}'
+ibmcloud resource reclamation-delete $reclamation_id -f
 
 #Artifacts
 
