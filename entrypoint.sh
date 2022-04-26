@@ -317,7 +317,7 @@ cat <<EOF > sbs-config.json
     "GITHUB_KEY_FILE": "~/.ssh/id_rsa",
     "GITHUB_URL": "$GITHUB_URL",
     "GITHUB_BRANCH": "master",
-    "IMAGE_TAG_PREFIX": "s390x-v1",
+    "IMAGE_TAG_PREFIX": "$RELEASE_VERSION",
     "REPO_ID": "sbs",
     "DOCKER_REPO": "$CR_NAME/$CONTAINER_NAME",
     "DOCKER_USER": "iamapikey",
@@ -365,17 +365,20 @@ echo ""
 echo ""
 sleep 300
 image_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F- '{print $5}'`
+deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F'=' '{print $2}'`
 ./build.py log --log build --env sbs-config.json
 ./build.py get-state-image --env sbs-config.json
 ./build.py get-manifest --env sbs-config.json  --verify-manifest
 expect << DONE
-  spawn ./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-$image_tag
+  spawn ./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-$RELEASE_VERSION-$image_tag
   expect "Passphrase:" {send "$PASSPHRASE\r"}
   expect "Passphrase:" {send "$PASSPHRASE\r"}
   expect "Passphrase:" {send "$PASSPHRASE\r"}
   expect eof
 DONE
 
-#Upload artifacts
+#Artifacts
+
 mkdir /github/workspace/artifacts
 cp sbs.asc /github/workspace/artifacts/
+echo $deploy_tag > /github/workspace/artifacts/deploy_tag
