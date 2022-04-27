@@ -5,6 +5,7 @@
 ibmcloud login --apikey $API_KEY --no-region
 ibmcloud target -g Default
 iam_api=`ibmcloud iam api-key-create myapikey -d "Build Secure Image" 2>&1 |grep "^API Key"|awk '{print $3}'`
+export IBMCLOUD_HOME=/usr/local/bin/
 ibmcloud plugin install container-registry
 ibmcloud plugin install hpvs
 ibmcloud cr namespace-add $CR_NAME
@@ -382,9 +383,9 @@ DONE
 
 #Cleaning up orphan resources
 
-ibmcloud hpvs instance-delete $BUILD_SERVER -f
-reclamation_id=`ibmcloud resource reclamations|grep SCHEDULED|awk '{print $1}'
-ibmcloud resource reclamation-delete $reclamation_id -f
+#ibmcloud hpvs instance-delete $BUILD_SERVER -f
+#reclamation_id=`ibmcloud resource reclamations|grep SCHEDULED|awk '{print $1}'
+#ibmcloud resource reclamation-delete $reclamation_id -f
 
 #Artifacts
 
