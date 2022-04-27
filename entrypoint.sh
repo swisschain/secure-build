@@ -5,6 +5,8 @@
 ibmcloud login --apikey $API_KEY --no-region
 ibmcloud target -g Default
 iam_api=`ibmcloud iam api-key-create myapikey -d "Build Secure Image" 2>&1 |grep "^API Key"|awk '{print $3}'`
+ibmcloud plugin install container-registry
+ibmcloud plugin install hpvs
 ibmcloud cr namespace-add $CR_NAME
 mkdir ~/.ssh
 echo $GIT_PRIVATE > ~/.ssh/id_rsa
