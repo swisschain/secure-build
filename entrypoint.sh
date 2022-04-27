@@ -2,6 +2,7 @@
 
 #Preparing
 
+export IBMCLOUD_HOME=/usr/local/bin/
 ibmcloud login --apikey $API_KEY
 ibmcloud target -g Default
 iam_api=`ibmcloud iam api-key-create myapikey -d "Build Secure Image" 2>&1 |grep "^API Key"|awk '{print $3}'`
