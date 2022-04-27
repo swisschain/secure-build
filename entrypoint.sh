@@ -367,7 +367,7 @@ echo "              Waiting for the build to complete     "
 echo "---------------------------------------------------------------------"
 echo ""
 echo ""
-sleep 300
+sleep 500
 image_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F- '{print $5}'`
 deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F'=' '{print $2}'`
 ./build.py log --log build --env sbs-config.json
@@ -389,6 +389,6 @@ DONE
 
 #Artifacts
 
-mkdir /github/workspace/artifacts
-cp sbs.asc /github/workspace/artifacts/
-echo $deploy_tag > /github/workspace/artifacts/deploy_tag
+mkdir /github/workspace/guardian
+cp sbs.asc /github/workspace/guardian/
+echo $deploy_tag > /github/workspace/guardian/deploy_tag
