@@ -6,7 +6,7 @@ ibmcloud login --apikey $API_KEY
 ibmcloud target -g Default
 iam_api=`ibmcloud iam api-key-create myapikey -d "Build Secure Image" 2>&1 |grep "^API Key"|awk '{print $3}'`
 ibmcloud cr namespace-add $CR_NAME
-echo $GITHUB_PRIVATE > ~/.ssh/id_rsa
+echo $GIT_PRIVATE > ~/.ssh/id_rsa
 chmod 400 ~/.ssh/id_rsa
 git clone https://github.com/ibm-hyper-protect/secure-build-cli.git
 cd secure-build-cli
@@ -315,7 +315,7 @@ cat <<EOF > sbs-config.json
     "IMAGE_TAG": "1.3.0.4",
     "CONTAINER_NAME": "$CONTAINER_NAME",
     "GITHUB_KEY_FILE": "~/.ssh/id_rsa",
-    "GITHUB_URL": "$GITHUB_URL",
+    "GITHUB_URL": "$GIT_URL",
     "GITHUB_BRANCH": "master",
     "IMAGE_TAG_PREFIX": "$RELEASE_VERSION",
     "REPO_ID": "sbs",
