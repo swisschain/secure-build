@@ -355,7 +355,7 @@ client_crt=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\
 client_ca=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "CLIENT_CA")
 server_crt=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "SERVER_CRT")
 server_key=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "SERVER_KEY")
-ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 -e $client_crt $certs
+ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 -e $certs
 echo "---------------------------------------------------------------------"
 echo "                  Waiting build server     "
 echo "---------------------------------------------------------------------"
