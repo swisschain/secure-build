@@ -350,8 +350,9 @@ EOF
 ./build.py create-client-cert --env sbs-config.json
 ./build.py create-server-cert --env sbs-config.json
 env_certs=`./build.py instance-env --env sbs-config.json 2>&1 |grep "\-e"`
-echo $env_certs
-ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4  $env_certs
+echo $env_certs > temp
+cat temp
+ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4  -e $env_certs
 echo "---------------------------------------------------------------------"
 echo "                  Waiting build server     "
 echo "---------------------------------------------------------------------"
