@@ -371,7 +371,7 @@ EOF
 for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done >> temp
 echo print temp file 
 cat temp
-#sleep 600
+sleep 600
 sh temp
 echo "---------------------------------------------------------------------"
 echo "                  Waiting build server     "
