@@ -15,7 +15,6 @@ chmod 400 ~/.ssh/id_rsa
 git clone https://github.com/ibm-hyper-protect/secure-build-cli.git
 cd secure-build-cli
 pip3 install -r requirements.txt
-#apt-get update && apt-get install screen -y
 
 #Create secure build server registartion file
 
@@ -352,23 +351,13 @@ EOF
 ./build.py create-server-cert --env sbs-config.json
 #env_certs=`./build.py instance-env --env sbs-config.json 2>&1 |grep "\-e"`
 export GPG_TTY=$(tty)
-env_certs=$(./build.py instance-env --env sbs-config.json )
+env_certs=$(./build.py instance-env --env sbs-config.json | awk -F"secure_build.asc" '{print $2}')
 echo env_certs=$env_certs
 #certs=$(for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done)
 #client_crt=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "CLIENT_CRT")
 #client_ca=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "CLIENT_CA")
 #server_crt=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "SERVER_CRT")
 #server_key=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "SERVER_KEY")
-#echo build script output
-#screen -S "sb" -d -m
-#screen -r "sb" -X stuff $'./build.py instance-env --env sbs-config.json > temp1\n'
-#screen -r "sb" -X stuff $'ls -la ./build.py > temp2\n'
-#screen -ls 
-#echo build script output
-#echo print temp1 file 
-#cat temp1
-#echo print temp2 file 
-#cat temp2
 #./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g
 #echo build script output
 #for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done
