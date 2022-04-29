@@ -357,9 +357,8 @@ env_certs=$(echo $build_out | awk -F"secure_build.asc" '{print $3}')
 echo env_certs=$env_certs
 #ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 $env_certs
 cat <<EOF > temp
-ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 
+ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 -e $env_certs
 EOF
-echo $env_certs >> temp
 echo cat temp
 cat temp
 sleep 600
