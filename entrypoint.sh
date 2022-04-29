@@ -351,6 +351,7 @@ EOF
 ./build.py create-client-cert --env sbs-config.json
 ./build.py create-server-cert --env sbs-config.json
 #env_certs=`./build.py instance-env --env sbs-config.json 2>&1 |grep "\-e"`
+export GPG_TTY=$(tty)
 env_certs=$(./build.py instance-env --env sbs-config.json )
 echo env_certs=$env_certs
 #certs=$(for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done)
