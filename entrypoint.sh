@@ -353,11 +353,11 @@ EOF
 export GPG_TTY=$(tty)
 build_out=$(./build.py instance-env --env sbs-config.json)
 echo build_out=$build_out
-env_certs=$(echo $build_out | awk -F"secure_build.asc" '{print $3}')
+env_certs=$(echo $build_out | awk -F"secure_build.asc " '{print $3}')
 echo env_certs=$env_certs
 #ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 $env_certs
 cat <<EOF > temp
-ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 -e $env_certs
+ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 $env_certs
 EOF
 echo cat temp
 cat temp
