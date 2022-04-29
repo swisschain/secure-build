@@ -356,19 +356,19 @@ EOF
 #server_crt=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "SERVER_CRT")
 #server_key=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "SERVER_KEY")
 echo build script output
-./build.py instance-env --env sbs-config.json 2>&1
+screen -d -m "./build.py instance-env --env sbs-config.json > temp 2>&1"
 echo build script output
-./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g
-echo build script output
-for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done
-echo build script output
+#./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g
+#echo build script output
+#for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done
+#echo build script output
 #server_key=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "SERVER_KEY")
 #ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 -e $certs
 #ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 -e ${client_crt} -e ${client_ca} -e ${server_crt} -e ${server_key}
-cat <<EOF > temp
-ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 
-EOF
-for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done >> temp
+#cat <<EOF > temp
+#ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 
+#EOF
+#for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done >> temp
 echo print temp file 
 cat temp
 sleep 600
