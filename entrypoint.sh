@@ -15,6 +15,7 @@ chmod 400 ~/.ssh/id_rsa
 git clone https://github.com/ibm-hyper-protect/secure-build-cli.git
 cd secure-build-cli
 pip3 install -r requirements.txt
+apt-get update && apt-get install screen -y
 
 #Create secure build server registartion file
 
