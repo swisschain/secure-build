@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+    python3.8 python3-pip python3.8-dev
 RUN apt update && apt install software-properties-common -y
-RUN add-apt-repository ppa:deadsnakes/ppa && install python3.8 -y
-RUN ln -s /usr/bin/pip3 /usr/bin/pip && \
-    ln -s /usr/bin/python3.8 /usr/bin/python
 
 RUN apt update && apt install git curl gpg expect -y
 
