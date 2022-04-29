@@ -358,8 +358,14 @@ EOF
 #server_key=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "SERVER_KEY")
 echo build script output
 screen -S "sb" -d -m
-screen -r "sb" -X stuff $'./build.py instance-env --env sbs-config.json > temp\n'
+screen -r "sb" -X stuff $'./build.py instance-env --env sbs-config.json > temp1\n'
+screen -r "sb" -X stuff $'ls -la ./build.py > temp2\n'
+screen -ls 
 echo build script output
+echo print temp1 file 
+cat temp1
+echo print temp2 file 
+cat temp2
 #./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g
 #echo build script output
 #for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done
@@ -371,10 +377,8 @@ echo build script output
 #ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 
 #EOF
 #for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done >> temp
-echo print temp file 
-cat temp
 sleep 600
-sh temp
+#sh temp
 echo "---------------------------------------------------------------------"
 echo "                  Waiting build server     "
 echo "---------------------------------------------------------------------"
