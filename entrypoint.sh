@@ -361,7 +361,6 @@ ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.a
 EOF
 echo cat temp
 cat temp
-#sleep 600
 sh temp
 echo "---------------------------------------------------------------------"
 echo "                  Waiting build server     "
@@ -379,7 +378,7 @@ echo "              Waiting for the build to complete     "
 echo "---------------------------------------------------------------------"
 echo ""
 echo ""
-#sleep 500
+sleep 500
 image_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F- '{print $5}'`
 deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F'=' '{print $2}'`
 ./build.py log --log build --env sbs-config.json
