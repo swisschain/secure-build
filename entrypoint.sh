@@ -371,14 +371,14 @@ EOF
 for i in $(./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g|grep "CLIENT_CRT\|CLIENT_CA\|SERVER_CRT\|SERVER_KEY") ;do printf "%s %s " "-e" $i; done >> temp
 echo print temp file 
 cat temp
-sleep 600
+#sleep 600
 sh temp
 echo "---------------------------------------------------------------------"
 echo "                  Waiting build server     "
 echo "---------------------------------------------------------------------"
 echo ""
 echo ""
-sleep 600
+#sleep 600
 build_ip=`ibmcloud hpvs instance $BUILD_SERVER 2>&1|grep "Public IP address"|awk '{print $4}'`
 sed -i "s/x.x.x.x/$build_ip/g" sbs-config.json
 echo "$build_ip   $HOSTNAME" >> /etc/hosts
@@ -389,7 +389,7 @@ echo "              Waiting for the build to complete     "
 echo "---------------------------------------------------------------------"
 echo ""
 echo ""
-sleep 500
+#sleep 500
 image_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F- '{print $5}'`
 deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F'=' '{print $2}'`
 ./build.py log --log build --env sbs-config.json
