@@ -361,14 +361,14 @@ ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.a
 EOF
 echo cat temp
 cat temp
-sleep 600
-#sh temp
+#sleep 600
+sh temp
 echo "---------------------------------------------------------------------"
 echo "                  Waiting build server     "
 echo "---------------------------------------------------------------------"
 echo ""
 echo ""
-#sleep 600
+sleep 600
 build_ip=`ibmcloud hpvs instance $BUILD_SERVER 2>&1|grep "Public IP address"|awk '{print $4}'`
 sed -i "s/x.x.x.x/$build_ip/g" sbs-config.json
 echo "$build_ip   $HOSTNAME" >> /etc/hosts
