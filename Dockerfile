@@ -1,10 +1,11 @@
-FROM ubuntu:18.04
-ENV TZ=Europe/Zurich
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y \
-    python3.8 python3-pip python3.8-dev
-RUN apt update && apt install software-properties-common -y
+FROM python:3.8.13-slim-buster
+#FROM ubuntu:18.04
+#ENV TZ=Europe/Zurich
+#RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+#RUN apt-get update && \
+#    apt-get install --no-install-recommends -y \
+#    python3.8 python3-pip python3.8-dev
+#RUN apt update && apt install software-properties-common -y
 
 RUN apt update && apt install git curl gpg expect -y
 
