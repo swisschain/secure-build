@@ -357,7 +357,8 @@ EOF
 #server_crt=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "SERVER_CRT")
 #server_key=$(./build.py instance-env --env sbs-config.json 2>&1|sed s/-e\ /\\n\\n/g|grep "SERVER_KEY")
 echo build script output
-screen -d -m "./build.py instance-env --env sbs-config.json > temp 2>&1"
+screen -S "sb" -d -m
+screen -r "sb" -X stuff $'./build.py instance-env --env sbs-config.json > temp\n'
 echo build script output
 #./build.py instance-env --env sbs-config.json 2>&1|sed s/\-e\ /\\n\\n/g
 #echo build script output
