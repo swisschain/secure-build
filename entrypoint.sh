@@ -389,7 +389,7 @@ deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk
 ./build.py get-state-image --env sbs-config.json
 ./build.py get-manifest --env sbs-config.json  --verify-manifest
 expect << DONE
-  spawn ./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-$image_tag
+  spawn ./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-12345
   expect "Passphrase:" {send "$PASSPHRASE\r"}
   expect "Passphrase:" {send "$PASSPHRASE\r"}
   expect "Passphrase:" {send "$PASSPHRASE\r"}
