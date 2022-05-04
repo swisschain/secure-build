@@ -10,7 +10,7 @@ ibmcloud plugin install container-registry
 ibmcloud plugin install hpvs
 ibmcloud cr namespace-add $CR_NAME
 mkdir ~/.ssh
-echo $GIT_PRIVATE > ~/.ssh/id_rsa
+echo $GIT_PRIVATE | base64 -d > ~/.ssh/id_rsa
 chmod 400 ~/.ssh/id_rsa
 git clone https://github.com/ibm-hyper-protect/secure-build-cli.git
 cd secure-build-cli
