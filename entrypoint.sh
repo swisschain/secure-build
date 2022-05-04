@@ -7,8 +7,8 @@ ibmcloud target -g Default
 export IBMCLOUD_HOME=/usr/local/bin/
 ibmcloud plugin install container-registry
 ibmcloud plugin install hpvs
+ibmcloud cr region-set eu-central
 ibmcloud cr namespace-add $CR_NAME
-ibmcloud cr region-set global
 mkdir ~/.ssh
 cat << EOF > ~/.ssh/temp
 $GIT_PRIVATE
