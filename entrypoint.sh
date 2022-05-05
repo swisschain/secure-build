@@ -391,6 +391,7 @@ deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk
 cat << EOF > pass.sh
 ./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-$image_tag
 EOF
+chmod +x ./pass.sh
 expect << DONE
   spawn ./pass.sh
   expect "Passphrase:" {send "$PASSPHRASE\r"}
