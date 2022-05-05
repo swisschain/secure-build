@@ -383,11 +383,15 @@ echo "---------------------------------------------------------------------"
 echo ""
 echo ""
 sleep 500
-image_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F- '{print $5}'`
+#image_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F- '{print $5}'`
 deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F'=' '{print $2}'`
 ./build.py log --log build --env sbs-config.json
 ./build.py get-state-image --env sbs-config.json
 ./build.py get-manifest --env sbs-config.json  --verify-manifest
+tag_out=$(./build.py log --log build --env sbs-config.json)
+echo tag_out=$tag_out
+image_tag=$(echo $tag_out | |grep image_tag|awk -F- '{print $5}')
+echo image_tag=$image_tag
 cat << EOF > pass.sh
 ./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-$image_tag
 EOF
