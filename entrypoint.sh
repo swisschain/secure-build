@@ -397,9 +397,8 @@ export GPG_TTY=$(tty)
 ./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-dd9bff2
 EOF
 cat ./pass.sh
-chmod +x ./pass.sh
 expect << DONE
-  spawn ./pass.sh
+  spawn sh ./pass.sh
   expect "Passphrase:" {send "$PASSPHRASE\r"}
   expect "Passphrase:" {send "$PASSPHRASE\r"}
   expect "Passphrase:" {send "$PASSPHRASE\r"}
