@@ -411,7 +411,7 @@ ibmcloud hpvs instance-delete $BUILD_SERVER -f
 sleep 10
 reclamation_id=`ibmcloud resource reclamations|grep SCHEDULED|awk '{print $1}'`
 ibmcloud resource reclamation-delete $reclamation_id -f
-ibmcloud cr namespace-rm $CR_NAME
+ibmcloud cr namespace-rm $CR_NAME -f
 
 #Artifacts
 
