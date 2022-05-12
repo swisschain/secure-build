@@ -393,7 +393,7 @@ echo tag_out=$tag_out
 image_tag=$(echo $tag_out)
 echo image_tag=$image_tag
 cat << EOF > pass.sh
-export GPG_TTY=\$\(tty\)
+export GPG_TTY=\$(tty)
 ./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-dd9bff2
 EOF
 cat ./pass.sh
