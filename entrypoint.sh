@@ -394,7 +394,8 @@ image_tag=$(echo $tag_out)
 echo image_tag=$image_tag
 cat << EOF > pass.sh
 export GPG_TTY=\$(tty)
-./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-dd9bff2
+./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-dd9bff2 > out.log 2>&1
+can out.log
 EOF
 cat ./pass.sh
 expect << DONE
