@@ -407,6 +407,7 @@ ls -la /github/workspace/secure-build-cli
 ./build.py get-config-json --env /github/workspace/secure-build-cli/sbs-config.json --key-id $CONTAINER_NAME-dd9bff2 > out.log 2>&1
 cat out.log
 EOF
+echo cat ./pass.sh
 cat ./pass.sh
 expect << DONE
   spawn sh ./pass.sh
