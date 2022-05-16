@@ -385,20 +385,26 @@ echo ""
 sleep 500
 #image_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F- '{print $5}'`
 deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F'=' '{print $2}'`
+echo build.py log
 ./build.py log --log build --env sbs-config.json
+echo build.py get-state-image
 ./build.py get-state-image --env sbs-config.json
+echo build.py get-manifest
 ./build.py get-manifest --env sbs-config.json  --verify-manifest
 tag_out=$(./build.py log --log build --env sbs-config.json|grep image_tag|awk -F- '{print $5}')
 echo tag_out=$tag_out
 image_tag=$(echo $tag_out)
 echo image_tag=$image_tag
+echo deploy_tag=$deploy_tag
 echo PWD
 pwd
 cat << EOF > pass.sh
 export GPG_TTY=\$(tty)
 echo PWD
 pwd
-./build.py get-config-json --env sbs-config.json --key-id $CONTAINER_NAME-dd9bff2 > out.log 2>&1
+echo ls
+ls -la /github/workspace/secure-build-cli
+./build.py get-config-json --env /github/workspace/secure-build-cli/sbs-config.json --key-id $CONTAINER_NAME-dd9bff2 > out.log 2>&1
 cat out.log
 EOF
 cat ./pass.sh
