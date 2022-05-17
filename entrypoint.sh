@@ -417,6 +417,7 @@ expect << DONE
   expect eof
 DONE
 
+sleep 500
 #Cleaning up orphan resources
 
 ibmcloud hpvs instance-delete $BUILD_SERVER -f
