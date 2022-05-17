@@ -409,13 +409,23 @@ cat out.log
 EOF
 echo cat ./pass.sh
 cat ./pass.sh
-expect << DONE
-  spawn sh ./pass.sh
-  expect "Passphrase:" {send "$PASSPHRASE\r"}
-  expect "Passphrase:" {send "$PASSPHRASE\r"}
-  expect "Passphrase:" {send "$PASSPHRASE\r"}
-  expect eof
-DONE
+#expect << DONE
+#  spawn sh ./pass.sh
+#  expect "Passphrase:" {send "$PASSPHRASE\r"}
+#  expect "Passphrase:" {send "$PASSPHRASE\r"}
+#  expect "Passphrase:" {send "$PASSPHRASE\r"}
+#  expect eof
+#DONE
+echo expect \<\< DONE > expect.sh
+echo "  spawn sh ./pass.sh" >> expect.sh
+echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
+echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
+echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
+echo "  expect eof" >> expect.sh
+echo "DONE" >> expect.sh
+echo cat ./expect.sh
+cat ./expect.sh
+sh ./expect.sh
 
 sleep 500
 #Cleaning up orphan resources
