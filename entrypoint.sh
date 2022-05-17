@@ -400,10 +400,6 @@ echo PWD
 pwd
 cat << EOF > pass.sh
 export GPG_TTY=\$(tty)
-echo PWD
-pwd
-echo ls
-ls -la /github/workspace/secure-build-cli
 ./build.py get-config-json --env /github/workspace/secure-build-cli/sbs-config.json --key-id $CONTAINER_NAME-dd9bff2
 EOF
 echo cat ./pass.sh
