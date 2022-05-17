@@ -415,11 +415,18 @@ cat ./pass.sh
 #  expect "Passphrase:" {send "$PASSPHRASE\r"}
 #  expect eof
 #DONE
+#echo expect \<\< DONE > expect.sh
+#echo "  spawn sh ./pass.sh" >> expect.sh
+#echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
+#echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
+#echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
+#echo "  expect eof" >> expect.sh
+#echo "DONE" >> expect.sh
 echo expect \<\< DONE > expect.sh
 echo "  spawn sh ./pass.sh" >> expect.sh
-echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
-echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
-echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
+echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
+echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
+echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
 echo "  expect eof" >> expect.sh
 echo "DONE" >> expect.sh
 echo cat ./expect.sh
