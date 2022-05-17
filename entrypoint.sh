@@ -423,6 +423,7 @@ cat ./pass.sh
 #echo "  expect eof" >> expect.sh
 #echo "DONE" >> expect.sh
 echo expect \<\< DONE > expect.sh
+echo "  exp_internal -f expect.log 1" >> expect.sh
 echo "  spawn sh ./pass.sh" >> expect.sh
 echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
 echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
@@ -432,6 +433,7 @@ echo "DONE" >> expect.sh
 echo cat ./expect.sh
 cat ./expect.sh
 sh ./expect.sh
+cat ./expect.log
 
 sleep 500
 #Cleaning up orphan resources
