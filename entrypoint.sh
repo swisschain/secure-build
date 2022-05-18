@@ -19,6 +19,7 @@ rm ~/.ssh/temp
 git clone https://github.com/ibm-hyper-protect/secure-build-cli.git
 cd secure-build-cli
 pip3 install -r requirements.txt
+apt-get update && apt-get install screen -y
 
 #Create secure build server registartion file
 
@@ -419,7 +420,7 @@ cat ./pass.sh
 #echo "  expect eof" >> expect.sh
 #echo "DONE" >> expect.sh
 echo expect \<\< DONE > expect.sh
-echo "  exp_internal -f expect.log 1" >> expect.sh
+echo "  exp_internal -f expect.log 0" >> expect.sh
 echo "  spawn sh ./pass.sh" >> expect.sh
 echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
 echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
@@ -429,6 +430,10 @@ echo "DONE" >> expect.sh
 echo cat ./expect.sh
 cat ./expect.sh
 sh ./expect.sh
+cat ./expect.log
+run in screen
+screen -S "sb" -d -m
+screen -r "sb" -X stuff $'sh ./expect.sh\n'
 cat ./expect.log
 
 sleep 500
