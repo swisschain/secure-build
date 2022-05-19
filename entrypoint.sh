@@ -21,7 +21,6 @@ cd secure-build-cli
 pip3 install -r requirements.txt
 #apt-get update && apt-get install screen -y
 apt install pinentry-tty
-echo "pinentry-program /usr/bin/pinentry-tty" > /github/home/.gnupg/gpg-agent.conf
 
 #Create secure build server registartion file
 
@@ -401,6 +400,10 @@ echo image_tag=$image_tag
 echo deploy_tag=$deploy_tag
 echo PWD
 pwd
+echo change gpg-agent pinentry-program
+echo "pinentry-program /usr/bin/pinentry-tty" > /github/home/.gnupg/gpg-agent.conf
+echo reload gpg-agent
+gpg-connect-agent reloadagent /bye
 cat << EOF > pass.sh
 export GPG_TTY=\$(tty)
 ./build.py get-config-json --env /github/workspace/secure-build-cli/sbs-config.json --key-id $CONTAINER_NAME-dd9bff2
