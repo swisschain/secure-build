@@ -21,7 +21,7 @@ cd secure-build-cli
 pip3 install -r requirements.txt
 #apt-get update && apt-get install screen -y
 apt install pinentry-tty
-echo "pinentry-program /usr/bin/pinentry-tty" > /root/.gnupg/gpg-agent.conf
+echo "pinentry-program /usr/bin/pinentry-tty" > /github/home/.gnupg/gpg-agent.conf
 
 #Create secure build server registartion file
 
