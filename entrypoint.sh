@@ -19,7 +19,9 @@ rm ~/.ssh/temp
 git clone https://github.com/ibm-hyper-protect/secure-build-cli.git
 cd secure-build-cli
 pip3 install -r requirements.txt
-apt-get update && apt-get install screen -y
+#apt-get update && apt-get install screen -y
+apt install pinentry-tty
+echo "pinentry-program /usr/bin/pinentry-tty" > /root/.gnupg/gpg-agent.conf
 
 #Create secure build server registartion file
 
@@ -423,18 +425,20 @@ echo expect \<\< DONE > expect.sh
 echo "  exp_internal -f expect.log 0" >> expect.sh
 echo "  spawn sh ./pass.sh" >> expect.sh
 echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
-echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
+echo "  expect \"Repeat:\" {send \"12345678\\\r\"}" >> expect.sh
 echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
 echo "  expect eof" >> expect.sh
 echo "DONE" >> expect.sh
 echo cat ./expect.sh
 cat ./expect.sh
+echo run ./expect.sh
 sh ./expect.sh
+echo cat ./expect.log
 cat ./expect.log
-run in screen
-screen -S "sb" -d -m
-screen -r "sb" -X stuff $'sh ./expect.sh\n'
-cat ./expect.log
+#run in screen
+#screen -S "sb" -d -m
+#screen -r "sb" -X stuff $'sh ./expect.sh\n'
+#cat ./expect.log
 
 sleep 500
 #Cleaning up orphan resources
