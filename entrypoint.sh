@@ -404,6 +404,7 @@ echo change gpg-agent pinentry-program
 echo "pinentry-program /usr/bin/pinentry-tty" > /github/home/.gnupg/gpg-agent.conf
 echo reload gpg-agent
 gpg-connect-agent reloadagent /bye
+# to check selection run update-alternatives --config pinentry
 cat << EOF > pass.sh
 export GPG_TTY=\$(tty)
 ./build.py get-config-json --env /github/workspace/secure-build-cli/sbs-config.json --key-id $CONTAINER_NAME-dd9bff2
