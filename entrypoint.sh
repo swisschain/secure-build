@@ -386,7 +386,8 @@ echo ""
 echo ""
 sleep 500
 #image_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F- '{print $5}'`
-deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F'=' '{print $2}'`
+#deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F'=' '{print $2}'`
+deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk '{print $5}'|awk -F'-' '{print $2}'`
 echo build.py log
 ./build.py log --log build --env sbs-config.json
 echo build.py get-state-image
@@ -451,11 +452,11 @@ ibmcloud hpvs instance-delete $BUILD_SERVER -f
 sleep 10
 reclamation_id=`ibmcloud resource reclamations|grep SCHEDULED|awk '{print $1}'`
 ibmcloud resource reclamation-delete $reclamation_id -f
-ibmcloud cr namespace-rm $CR_NAME -f
+#ibmcloud cr namespace-rm $CR_NAME -f
 
 #Artifacts
 
 mkdir /github/workspace/guardian
 cp sbs.enc /github/workspace/guardian/
-echo $deploy_tag > /github/workspace/guardian/deploy_tag
+echo "$RELEASE_VERSION-$deploy_tag" > /github/workspace/guardian/deploy_tag
 ls -la /github/workspace/guardian/
