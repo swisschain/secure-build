@@ -407,7 +407,7 @@ gpg-connect-agent reloadagent /bye
 # to check selection run update-alternatives --config pinentry
 cat << EOF > pass.sh
 export GPG_TTY=\$(tty)
-./build.py get-config-json --env /github/workspace/secure-build-cli/sbs-config.json --key-id $CONTAINER_NAME-dd9bff2
+./build.py get-config-json --env /github/workspace/secure-build-cli/sbs-config.json --key-id $CONTAINER_NAME-$deploy_tag
 EOF
 echo cat ./pass.sh
 cat ./pass.sh
@@ -428,9 +428,9 @@ cat ./pass.sh
 echo expect \<\< DONE > expect.sh
 echo "  exp_internal -f expect.log 0" >> expect.sh
 echo "  spawn sh ./pass.sh" >> expect.sh
-echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
-echo "  expect \"Repeat:\" {send \"12345678\\\r\"}" >> expect.sh
-echo "  expect \"Passphrase:\" {send \"12345678\\\r\"}" >> expect.sh
+echo "  expect \"Passphrase:\" {send \"$PASSPHRASE\\\r\"}" >> expect.sh
+echo "  expect \"Repeat:\" {send \"$PASSPHRASE\\\r\"}" >> expect.sh
+echo "  expect \"Passphrase:\" {send \"$PASSPHRASE\\\r\"}" >> expect.sh
 echo "  expect eof" >> expect.sh
 echo "DONE" >> expect.sh
 echo cat ./expect.sh
@@ -443,7 +443,7 @@ cat ./expect.log
 #screen -S "sb" -d -m
 #screen -r "sb" -X stuff $'sh ./expect.sh\n'
 #cat ./expect.log
-
+ls -la
 sleep 500
 #Cleaning up orphan resources
 
