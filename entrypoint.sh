@@ -456,5 +456,5 @@ ibmcloud cr namespace-rm $CR_NAME -f
 #Artifacts
 
 mkdir /github/workspace/guardian
-cp sbs.asc /github/workspace/guardian/
+cp sbs.enc /github/workspace/guardian/
 echo $deploy_tag > /github/workspace/guardian/deploy_tag
