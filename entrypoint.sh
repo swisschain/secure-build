@@ -19,7 +19,6 @@ rm ~/.ssh/temp
 git clone https://github.com/ibm-hyper-protect/secure-build-cli.git
 cd secure-build-cli
 pip3 install -r requirements.txt
-#apt-get update && apt-get install screen -y
 apt install pinentry-tty
 
 #Create secure build server registartion file
@@ -355,13 +354,11 @@ EOF
 
 ./build.py create-client-cert --env sbs-config.json
 ./build.py create-server-cert --env sbs-config.json
-#env_certs=`./build.py instance-env --env sbs-config.json 2>&1 |grep "\-e"`
 export GPG_TTY=$(tty)
 build_out=$(./build.py instance-env --env sbs-config.json)
 echo build_out=$build_out
 env_certs=$(echo $build_out | awk -F"secure_build.asc " '{print $3}')
 echo env_certs=$env_certs
-#ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 $env_certs
 cat <<EOF > temp
 ibmcloud hpvs instance-create $BUILD_SERVER free fra05 --rd-path "secure_build.asc" -i 1.3.0.4 $env_certs
 EOF
@@ -385,8 +382,6 @@ echo "---------------------------------------------------------------------"
 echo ""
 echo ""
 sleep 500
-#image_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F- '{print $5}'`
-#deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk -F'=' '{print $2}'`
 deploy_tag=`./build.py log --log build --env sbs-config.json |grep image_tag|awk '{print $5}'|awk -F'-' '{print $2}'`
 echo build.py log
 ./build.py log --log build --env sbs-config.json
@@ -412,20 +407,6 @@ export GPG_TTY=\$(tty)
 EOF
 echo cat ./pass.sh
 cat ./pass.sh
-#expect << DONE
-#  spawn sh ./pass.sh
-#  expect "Passphrase:" {send "$PASSPHRASE\r"}
-#  expect "Passphrase:" {send "$PASSPHRASE\r"}
-#  expect "Passphrase:" {send "$PASSPHRASE\r"}
-#  expect eof
-#DONE
-#echo expect \<\< DONE > expect.sh
-#echo "  spawn sh ./pass.sh" >> expect.sh
-#echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
-#echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
-#echo "  expect \"Passphrase:\" {send \"\$PASSPHRASE\\\r\"}" >> expect.sh
-#echo "  expect eof" >> expect.sh
-#echo "DONE" >> expect.sh
 echo expect \<\< DONE > expect.sh
 echo "  exp_internal -f expect.log 0" >> expect.sh
 echo "  spawn sh ./pass.sh" >> expect.sh
@@ -440,12 +421,6 @@ echo run ./expect.sh
 sh ./expect.sh
 echo cat ./expect.log
 cat ./expect.log
-#run in screen
-#screen -S "sb" -d -m
-#screen -r "sb" -X stuff $'sh ./expect.sh\n'
-#cat ./expect.log
-ls -la
-sleep 500
 #Cleaning up orphan resources
 
 ibmcloud hpvs instance-delete $BUILD_SERVER -f
@@ -458,5 +433,33 @@ ibmcloud resource reclamation-delete $reclamation_id -f
 
 mkdir /github/workspace/guardian
 cp sbs.enc /github/workspace/guardian/
-echo "$RELEASE_VERSION-$deploy_tag" > /github/workspace/guardian/deploy_tag
+cat << 'EOF' > /github/workspace/guardian/deploy-instructions.md
+# Launch application as an HPVS instance
+
+Login to IBM cloud via ibcmcloud cli
+
+Download the encrypted registration file (`sbs.enc`) for the image.
+
+You need to make some changes in the command below:
+
+- You need to change `HPVS-NAME`
+- You need to change `YOUR-LOCATION` to one of the locations as explained in the following paragraphs.
+    - If you logged in to the `us-east`, then choose one of these three locations: `wdc04`, `wdc06` or `wdc07`
+    - If you logged in to the `au-syd`, then choose one of these three locations: `syd01`, `syd04` or `syd05`
+    - If you logged in to the `eu-de`, then choose one of these three locations: `fra02`, `fra04` or `fra05`
+
+Add parametrs to environment variables:
+
+- `INSTANCE_NAME`
+- `LOGGING_ELASTIC_INDEX_PREFIX`
+-  `LOGGING_ELASTIC_NODE_URLS`
+
+ or leave them empty
+
+Launch application:
+
+```bash
+ibmcloud hpvs instance-create HPVS-NAME entry YOUR-LOCATION  --rd-path sbs.enc -i $RELEASE_VERSION-$deploy_tag -e JAVA_OPTS="-Xms64m -Xmx2048m" -e "INSTANCE_NAME"="" -e "LOGGING_ELASTIC_INDEX_PREFIX"="" -e "LOGGING_ELASTIC_NODE_URLS"=""
+```
+EOF
 ls -la /github/workspace/guardian/
