@@ -16,7 +16,7 @@ EOF
 cat ~/.ssh/temp | base64 -d > ~/.ssh/id_rsa
 chmod 400 ~/.ssh/id_rsa
 rm ~/.ssh/temp
-git clone --single-branch --branch master "https://x-access-token:$GIT_USER_API_TOKEN@github.com/swisschain/custody-certificates/ /tmp/git
+git clone --single-branch --branch DO-1757-add-certificates "https://x-access-token:$GIT_USER_API_TOKEN@github.com/swisschain/custody-certificates/ /tmp/git
 cd custody-certificates/$SERVICE_NAME
 pip3 install -r requirements.txt
 apt install pinentry-tty
