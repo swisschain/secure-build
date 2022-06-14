@@ -79,7 +79,7 @@ echo "# Launch application as an HPVS instance" > /github/workspace/guardian/dep
 echo " " >> /github/workspace/guardian/deploy-instructions.md
 echo "Login to IBM cloud via ibcmcloud cli" >> /github/workspace/guardian/deploy-instructions.md
 echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo "Download the encrypted registration file (`sbs.enc`) for the image." >> /github/workspace/guardian/deploy-instructions.md
+echo "Download the encrypted registration file (\`sbs.enc\`) for the image." >> /github/workspace/guardian/deploy-instructions.md
 echo " " >> /github/workspace/guardian/deploy-instructions.md
 echo "You need to make some changes in the command below:" >> /github/workspace/guardian/deploy-instructions.md
 echo " " >> /github/workspace/guardian/deploy-instructions.md
