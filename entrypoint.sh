@@ -100,6 +100,6 @@ echo " " >> /github/workspace/guardian/deploy-instructions.md
 echo "Launch application:" >> /github/workspace/guardian/deploy-instructions.md
 echo " " >> /github/workspace/guardian/deploy-instructions.md
 echo "\`\`\`bash" >> /github/workspace/guardian/deploy-instructions.md
-echo "ibmcloud hpvs instance-create HPVS-NAME entry YOUR-LOCATION  --rd-path sbs.enc -i $RELEASE_VERSION-$deploy_tag -e JAVA_OPTS="-Xms64m -Xmx2048m" -e "INSTANCE_NAME"="" -e "LOGGING_ELASTIC_INDEX_PREFIX"="" -e "LOGGING_ELASTIC_NODE_URLS"="" " >> /github/workspace/guardian/deploy-instructions.md
+echo "ibmcloud hpvs instance-create HPVS-NAME entry YOUR-LOCATION  --rd-path sbs.enc -i $RELEASE_VERSION-$deploy_tag -e JAVA_OPTS="-Xms64m -Xmx2048m" -e "INSTANCE_NAME"="" -e "LOGGING_ELASTIC_INDEX_PREFIX"="" -e "LOGGING_ELASTIC_NODE_URLS"=""  >> /github/workspace/guardian/deploy-instructions.md
 echo "\`\`\`" >> /github/workspace/guardian/deploy-instructions.md
 ls -la /github/workspace/guardian/
