@@ -46,6 +46,9 @@ sleep 600
 build_ip=`ibmcloud hpvs instance $BUILD_SERVER 2>&1|grep "Public IP address"|awk '{print $4}'`
 sed -i "s/x.x.x.x/$build_ip/g" sbs-config.json
 sed -i "s/hostname/$HOSTNAME/g" sbs-config.json
+sed -i "s/image_tag_prefix/$RELEASE_VERSION/g" sbs-config.json
+sed -i "s/docker_password/$IAMAPI_KEY/g" sbs-config.json
+sed -i "s/docker_ro_password/$IAMAPI_KEY/g" sbs-config.json
 echo "$build_ip   $HOSTNAME" >> /etc/hosts
 ./build.py init --env sbs-config.json
 ./build.py update --env sbs-config.json
