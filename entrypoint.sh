@@ -45,6 +45,7 @@ echo ""
 sleep 600
 build_ip=`ibmcloud hpvs instance $BUILD_SERVER 2>&1|grep "Public IP address"|awk '{print $4}'`
 sed -i "s/x.x.x.x/$build_ip/g" sbs-config.json
+sed -i "s/$HOSTNAME/hostname/g" sbs-config.json
 echo "$build_ip   $HOSTNAME" >> /etc/hosts
 ./build.py update --env sbs-config.json
 ./build.py build --env sbs-config.json
