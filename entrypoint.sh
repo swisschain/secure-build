@@ -90,8 +90,8 @@ echo "Download the encrypted registration file \`sbs.enc\` for the image." >> /g
 echo " " >> /github/workspace/guardian/deploy-instructions.md
 echo "You need to make some changes in the command below:" >> /github/workspace/guardian/deploy-instructions.md
 echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo "- You need to change `HPVS-NAME`" >> /github/workspace/guardian/deploy-instructions.md
-echo "- You need to change `YOUR-LOCATION` to one of the locations as explained in the following paragraphs." >> /github/workspace/guardian/deploy-instructions.md
+echo "- You need to change \`HPVS-NAME\`" >> /github/workspace/guardian/deploy-instructions.md
+echo "- You need to change \`YOUR-LOCATION\` to one of the locations as explained in the following paragraphs." >> /github/workspace/guardian/deploy-instructions.md
 echo "    - If you logged in to the \`us-east\`, then choose one of these three locations: \`wdc04\`, \`wdc06\` or \`wdc07\`" >> /github/workspace/guardian/deploy-instructions.md
 echo "    - If you logged in to the \`au-syd\`, then choose one of these three locations: \`syd01\`, \`syd04\` or \`syd05\`" >> /github/workspace/guardian/deploy-instructions.md
 echo "    - If you logged in to the \`eu-de\`, then choose one of these three locations: \`fra02\`, \`fra04\` or \`fra05\`" >> /github/workspace/guardian/deploy-instructions.md
