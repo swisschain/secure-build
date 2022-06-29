@@ -8,7 +8,7 @@ export IBMCLOUD_HOME=/usr/local/bin/
 ibmcloud plugin install container-registry
 ibmcloud plugin install hpvs
 ibmcloud cr region-set eu-central
-ibmcloud cr namespace-add $CR_NAME
+ibmcloud cr namespace-add $CR_NAME-$RELEASE_VERSION
 mkdir ~/.ssh
 cat << EOF > ~/.ssh/temp
 $GIT_PRIVATE
@@ -328,7 +328,7 @@ cat <<EOF > sbs-config.json
     "GITHUB_BRANCH": "master",
     "IMAGE_TAG_PREFIX": "$RELEASE_VERSION",
     "REPO_ID": "sbs",
-    "DOCKER_REPO": "$CR_NAME/$CONTAINER_NAME",
+    "DOCKER_REPO": "$CR_NAME-$RELEASE_VERSION/$CONTAINER_NAME",
     "DOCKER_USER": "iamapikey",
     "DOCKER_PASSWORD": "$IAMAPI_KEY",
     "DOCKER_RO_USER": "iamapikey",
