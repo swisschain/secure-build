@@ -9,7 +9,7 @@ ibmcloud plugin install container-registry
 ibmcloud plugin install hpvs
 ibmcloud cr region-set eu-central
 echo $RELEASE_VERSION
-$release=`echo $RELEASE_VERSION|sed 's/\./-/g'`
+release=`echo $RELEASE_VERSION|sed 's/\./-/g'`
 echo $release
 ibmcloud cr namespace-add $CR_NAME-$release
 mkdir ~/.ssh
