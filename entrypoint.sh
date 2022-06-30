@@ -432,33 +432,33 @@ ibmcloud resource reclamation-delete $reclamation_id -f
 
 #Artifacts
 
-mkdir /github/workspace/guardian
-cp sbs.enc /github/workspace/guardian/
-echo "# Launch application as an HPVS instance" > /github/workspace/guardian/deploy-instructions.md
-echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo "Login to IBM cloud via ibcmcloud cli" >> /github/workspace/guardian/deploy-instructions.md
-echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo "Download the encrypted registration file (`sbs.enc`) for the image." >> /github/workspace/guardian/deploy-instructions.md
-echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo "You need to make some changes in the command below:" >> /github/workspace/guardian/deploy-instructions.md
-echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo "- You need to change \`HPVS-NAME\`" >> /github/workspace/guardian/deploy-instructions.md
-echo "- You need to change \`YOUR-LOCATION\` to one of the locations as explained in the following paragraphs." >> /github/workspace/guardian/deploy-instructions.md
-echo "    - If you logged in to the \`us-east\`, then choose one of these three locations: \`wdc04\`, \`wdc06\` or \`wdc07\`" >> /github/workspace/guardian/deploy-instructions.md
-echo "    - If you logged in to the \`au-syd\`, then choose one of these three locations: \`syd01\`, \`syd04\` or \`syd05\`" >> /github/workspace/guardian/deploy-instructions.md
-echo "    - If you logged in to the \`eu-de\`, then choose one of these three locations: \`fra02\`, \`fra04\` or \`fra05\`" >> /github/workspace/guardian/deploy-instructions.md
-echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo "Add parametrs to environment variables:" >> /github/workspace/guardian/deploy-instructions.md
-echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo "- \`INSTANCE_NAME\`" >> /github/workspace/guardian/deploy-instructions.md
-echo "- \`LOGGING_ELASTIC_INDEX_PREFIX\`" >> /github/workspace/guardian/deploy-instructions.md
-echo "- \`LOGGING_ELASTIC_NODE_URLS\`" >> /github/workspace/guardian/deploy-instructions.md
-echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo " or leave them empty" >> /github/workspace/guardian/deploy-instructions.md
-echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo "Launch application:" >> /github/workspace/guardian/deploy-instructions.md
-echo " " >> /github/workspace/guardian/deploy-instructions.md
-echo "\`\`\`bash" >> /github/workspace/guardian/deploy-instructions.md
-echo "ibmcloud hpvs instance-create HPVS-NAME entry YOUR-LOCATION  --rd-path sbs.enc -i $RELEASE_VERSION-$deploy_tag -e JAVA_OPTS="-Xms64m -Xmx2048m" -e "INSTANCE_NAME"="" -e "LOGGING_ELASTIC_INDEX_PREFIX"="" -e "LOGGING_ELASTIC_NODE_URLS"="" " >> /github/workspace/guardian/deploy-instructions.md
-echo "\`\`\`" >> /github/workspace/guardian/deploy-instructions.md
-ls -la /github/workspace/guardian/
+mkdir /github/workspace/deploy
+cp sbs.enc /github/workspace/deploy/
+echo "# Launch application as an HPVS instance" > /github/workspace/deploy/deploy-instructions.md
+echo " " >> /github/workspace/deploy/deploy-instructions.md
+echo "Login to IBM cloud via ibcmcloud cli" >> /github/workspace/deploy/deploy-instructions.md
+echo " " >> /github/workspace/deploy/deploy-instructions.md
+echo "Download the encrypted registration file (`sbs.enc`) for the image." >> /github/workspace/deploy/deploy-instructions.md
+echo " " >> /github/workspace/deploy/deploy-instructions.md
+echo "You need to make some changes in the command below:" >> /github/workspace/deploy/deploy-instructions.md
+echo " " >> /github/workspace/deploy/deploy-instructions.md
+echo "- You need to change \`HPVS-NAME\`" >> /github/workspace/deploy/deploy-instructions.md
+echo "- You need to change \`YOUR-LOCATION\` to one of the locations as explained in the following paragraphs." >> /github/workspace/deploy/deploy-instructions.md
+echo "    - If you logged in to the \`us-east\`, then choose one of these three locations: \`wdc04\`, \`wdc06\` or \`wdc07\`" >> /github/workspace/deploy/deploy-instructions.md
+echo "    - If you logged in to the \`au-syd\`, then choose one of these three locations: \`syd01\`, \`syd04\` or \`syd05\`" >> /github/workspace/deploy/deploy-instructions.md
+echo "    - If you logged in to the \`eu-de\`, then choose one of these three locations: \`fra02\`, \`fra04\` or \`fra05\`" >> /github/workspace/deploy/deploy-instructions.md
+echo " " >> /github/workspace/deploy/deploy-instructions.md
+echo "Add parametrs to environment variables:" >> /github/workspace/deploy/deploy-instructions.md
+echo " " >> /github/workspace/deploy/deploy-instructions.md
+echo "- \`INSTANCE_NAME\`" >> /github/workspace/deploy/deploy-instructions.md
+echo "- \`LOGGING_ELASTIC_INDEX_PREFIX\`" >> /github/workspace/deploy/deploy-instructions.md
+echo "- \`LOGGING_ELASTIC_NODE_URLS\`" >> /github/workspace/deploy/deploy-instructions.md
+echo " " >> /github/workspace/deploy/deploy-instructions.md
+echo " or leave them empty" >> /github/workspace/deploy/deploy-instructions.md
+echo " " >> /github/workspace/deploy/deploy-instructions.md
+echo "Launch application:" >> /github/workspace/deploy/deploy-instructions.md
+echo " " >> /github/workspace/deploy/deploy-instructions.md
+echo "\`\`\`bash" >> /github/workspace/deploy/deploy-instructions.md
+echo "ibmcloud hpvs instance-create HPVS-NAME entry YOUR-LOCATION  --rd-path sbs.enc -i $RELEASE_VERSION-$deploy_tag -e JAVA_OPTS="-Xms64m -Xmx2048m" -e "INSTANCE_NAME"="" -e "LOGGING_ELASTIC_INDEX_PREFIX"="" -e "LOGGING_ELASTIC_NODE_URLS"="" " >> /github/workspace/deploy/deploy-instructions.md
+echo "\`\`\`" >> /github/workspace/deploy/deploy-instructions.md
+ls -la /github/workspace/deploy/
